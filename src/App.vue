@@ -1,7 +1,30 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+    <!-- Simple header with scrollable tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Title</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <router-link to="/" class="mdl-layout__tab is-active">Tab 1</router-link>
+        </div>
+      </header>
+
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Menu</span>
+        <div class="mdl-navigation">
+          <router-link to="/" class="mdl-navigation__link">Some Action</router-link>
+        </div>
+      </div>
+
+      <main class="mdl-layout__content">
+        <router-view></router-view>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -18,6 +41,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
