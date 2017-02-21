@@ -35,8 +35,10 @@ module.exports = {
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    // .vue files
     'object-shorthand': 0,
     'func-names': 0,
-    'space-before-function-paren': 0
+    'space-before-function-paren': 0,
+    'quote-props': 0
   }
 }
