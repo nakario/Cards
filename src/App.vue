@@ -6,11 +6,12 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Title</span>
+          <span class="mdl-layout-title">Cards</span>
         </div>
         <!-- Tabs -->
-        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-          <router-link to="/" class="mdl-layout__tab is-active">Tab 1</router-link>
+        <div class="mdl-layout__tab-bar">
+          <button v-for="file in files" @click="clickFile(file.id)" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">{{ file.name }}</button>
+          <button @click="newFile" class="mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect">＋</button>
         </div>
       </header>
 
@@ -29,8 +30,27 @@
 </template>
 
 <script>
+import router from './router';
+
 export default {
   name: 'app',
+  data: function() {
+    return {
+      files: [],
+    };
+  },
+  methods: {
+    clickFile: function(id) {
+      router.push(`/files/${id}`);
+    },
+    newFile: function() {
+      const id = this.files.length + 1;
+      this.files.push({
+        id,
+        name: `File ${id}`,
+      });
+    },
+  },
 };
 </script>
 
