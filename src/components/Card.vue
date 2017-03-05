@@ -1,10 +1,10 @@
 <template>
-  <div id="card" class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title mdl-card--border">
       Title
     </div>
     <div class="mdl-card--border">
-      Main Containts
+      <main-table></main-table>
     </div>
     <div class="mdl-card__actions mdl-card--border">
       <a class="mdl-button mdl-js-button">
@@ -14,8 +14,13 @@
 </template>
 
 <script>
+import Table from './Table';
+
 export default {
   name: 'card',
+  components: {
+    'main-table': Table,
+  },
 };
 </script>
 
