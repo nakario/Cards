@@ -4,7 +4,7 @@
       Title
     </div>
     <div class="mdl-card--border">
-      Main Contents
+      <main-table></main-table>
     </div>
     <div class="mdl-card__actions mdl-card--border">
       <a class="mdl-button mdl-js-button">
@@ -14,8 +14,13 @@
 </template>
 
 <script>
+import Table from './Table';
+
 export default {
   name: 'card',
+  components: {
+    'main-table': Table,
+  },
 };
 </script>
 
