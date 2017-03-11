@@ -1,7 +1,8 @@
 <template>
   <div class="card mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title mdl-card--border">
-      Title
+    <div class="title mdl-card__title" contenteditable="true" placeholder="Title">
+    </div>
+    <div class="supporting-text mdl-card__supporting-text mdl-card--border" contenteditable="true" placeholder="description">
     </div>
     <div class="main mdl-card--border">
       <main-table></main-table>
@@ -27,6 +28,25 @@ export default {
 <style scoped>
   .card {
     margin: 10px;
+  }
+  .title {
+    padding-bottom: 0;
+    text-align: left;
+  }
+  .title:focus {
+    outline: none;
+  }
+  .supporting-text {
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .supporting-text:focus {
+    outline: none;
+  }
+  [contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    display: block; /* For Firefox */
   }
   .main {
     width: 100%;
