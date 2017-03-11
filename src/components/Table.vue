@@ -2,8 +2,8 @@
   <div class="table-wrapper">
     <table>
       <tr v-for="row in rows">
-        <cell v-for="col in cols" :header="row===0||col===0">
-          <div class="placeholder" @blur="log(`${row}, ${col}`)" contenteditable="true">
+        <cell v-for="col in cols" :header="row===0||col===0" :class="{'top-left': row===0&&col===0}">
+          <div class="placeholder" @blur="log(`${row}, ${col}`)" :contenteditable="row!==0||col!==0">
             {{ td[row][col].type == undefined ? 'x' : td[row][col].data }}
           </div>
         </cell>
@@ -19,7 +19,7 @@
   const MAX_COL = 10;
 
   function hoge() {
-    return [[{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }]];
+    return [[{ data: '', type: 'String' }, { data: 'header', type: 'String' }, { data: 'aaaaaaaaaaaaaaaaaaaaaaa', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }]];
   }
 
   export default {
@@ -80,6 +80,14 @@
     width: 100px;
     overflow: hidden;
     border: 2px black solid;
+  }
+  th.top-left {
+    background-image: linear-gradient(to top right,
+                        transparent, transparent 47%,
+                        transparent 47%, black 49%,
+                        black 49%, black 51%,
+                        black 51%, transparent 53%,
+                        transparent 53%, transparent);
   }
   .placeholder {
     widows: 100px;
