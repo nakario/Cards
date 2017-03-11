@@ -3,7 +3,7 @@
     <div class="mdl-card__title mdl-card--border">
       Title
     </div>
-    <div class="mdl-card--border">
+    <div class="main mdl-card--border">
       <main-table></main-table>
     </div>
     <div class="mdl-card__actions mdl-card--border">
@@ -27,5 +27,13 @@ export default {
 <style scoped>
   .card {
     margin: 10px;
+  }
+  .main {
+    width: 100%;
+    height: 100px;
+    overflow: scroll;
+  }
+  .main::-webkit-scrollbar {
+    display: none;
   }
 </style>

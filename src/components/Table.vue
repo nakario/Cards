@@ -15,8 +15,8 @@
 <script>
   import Cell from './Cell';
 
-  const MAX_ROW = 5;
-  const MAX_COL = 10;
+  const MAX_ROW = 100;
+  const MAX_COL = 100;
 
   function hoge() {
     return [[{ data: '', type: 'String' }, { data: 'header', type: 'String' }, { data: 'aaaaaaaaaaaaaaaaaaaaaaa', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }]];
