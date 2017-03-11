@@ -90,7 +90,9 @@
                         transparent 53%, transparent);
   }
   .placeholder {
+    width: 100px;
     widows: 100px;
+    white-space: nowrap;
   }
   .placeholder:focus {
     outline: none;
