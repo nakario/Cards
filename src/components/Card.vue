@@ -1,5 +1,5 @@
 <template>
-  <div class="mdl-card mdl-shadow--2dp">
+  <div class="card mdl-card mdl-shadow--2dp">
     <div class="mdl-card__title mdl-card--border">
       Title
     </div>
@@ -25,4 +25,7 @@ export default {
 </script>
 
 <style scoped>
+  .card {
+    margin: 10px;
+  }
 </style>
