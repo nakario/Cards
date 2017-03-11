@@ -2,17 +2,19 @@
   <div class="table-wrapper">
     <table>
       <tr v-for="row in rows">
-        <td v-for="col in cols">
+        <cell v-for="col in cols" :header="row===0||col===0">
           <div class="placeholder" @blur="log(`${row}, ${col}`)" contenteditable="true">
             {{ td[row][col].type == undefined ? 'x' : td[row][col].data }}
           </div>
-        </td>
+        </cell>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
+  import Cell from './Cell';
+
   const MAX_ROW = 5;
   const MAX_COL = 10;
 
@@ -31,6 +33,9 @@
       table: {
         default: hoge,
       },
+    },
+    components: {
+      'cell': Cell,
     },
     computed: {
       rows: function() {
@@ -73,13 +78,11 @@
   th,
   td {
     width: 100px;
-    height: 24px;
     overflow: hidden;
     border: 2px black solid;
   }
   .placeholder {
     widows: 100px;
-    height: 24px;
   }
   .placeholder:focus {
     outline: none;
