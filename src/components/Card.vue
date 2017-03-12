@@ -32,6 +32,9 @@ export default {
   .title {
     padding-bottom: 0;
     text-align: left;
+    word-wrap: break-word;
+    white-space: normal;
+    display: block;
   }
   .title:focus {
     outline: none;

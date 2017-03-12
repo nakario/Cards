@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <!-- Simple header with scrollable tabs. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="flex-container mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-      <header class="mdl-layout__header">
+      <header class="flex-header mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">Cards</span>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <main class="mdl-layout__content">
+      <main class="flex-main mdl-layout__content">
         <router-view></router-view>
       </main>
     </div>
@@ -61,5 +61,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.flex-main {
+  flex: 1;
 }
 </style>
