@@ -11,6 +11,9 @@
       <a class="mdl-button mdl-js-button">
         action
       </a>
+      <a class="settings-button mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">settings</i>
+      </a>
   </div>
 </template>
 
@@ -58,5 +61,8 @@ export default {
   }
   .main::-webkit-scrollbar {
     display: none;
+  }
+  .settings-button {
+    float: right;
   }
 </style>
