@@ -10,7 +10,7 @@
     </div>
     <div class="detail-view">
       <div v-if="cards.length > 0">
-        <file-table :row="cards[0].table.row" :col="cards[0].table.col" :data="cards[0].table.data"></file-table>
+        <file-table :row="cards[0].table.row" :col="cards[0].table.col" :data="cards[0].table.data" :fid="$route.params.id" :cid="cards[0].id"></file-table>
       </div>
       <div v-else></div>
     </div>
