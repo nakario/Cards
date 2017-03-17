@@ -17,6 +17,9 @@
   import { CHANGE_CELL } from '../vuex/mutation-types';
 
   export default {
+    components: {
+      'cell': Cell,
+    },
     props: {
       row: {
         type: Number,
@@ -35,9 +38,6 @@
       cid: {
         required: true,
       },
-    },
-    components: {
-      'cell': Cell,
     },
     computed: {
       rows: function() {
