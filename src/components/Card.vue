@@ -5,10 +5,12 @@
     <div class="supporting-text mdl-card__supporting-text mdl-card--border" contenteditable="true" placeholder="description">
     </div>
     <div class="main mdl-card--border">
-      <main-table></main-table>
+      <card-table :row="row" :col="col" :data="table.data"></card-table>
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <a class="mdl-button mdl-js-button">
+      <input v-model="row" type="number" class="input-row">
+      <input v-model="col" type="number" class="input-col">
+      <a class="mdl-button mdl-js-button" @click="log(table)">
         action
       </a>
       <a class="settings-button mdl-button mdl-js-button mdl-button--icon">
@@ -19,11 +21,56 @@
 
 <script>
 import Table from './Table';
+import { CHANGE_ROW, CHANGE_COL } from '../vuex/mutation-types';
 
 export default {
   name: 'card',
   components: {
-    'main-table': Table,
+    'card-table': Table,
+  },
+  methods: {
+    log: function(msg) {
+      console.log(msg);
+    },
+  },
+  props: {
+    fid: {
+      requierd: true,
+    },
+    id: {
+      requierd: true,
+    },
+  },
+  computed: {
+    table: function() {
+      const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+      const card = file.cards.find(c => c.id.toString() === this.id.toString());
+      return card.table;
+    },
+    row: {
+      get() {
+        const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+        const card = file.cards.find(c => c.id.toString() === this.id.toString());
+        return card.table.row;
+      },
+      set(value) {
+        const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+        const card = file.cards.find(c => c.id.toString() === this.id.toString());
+        this.$store.commit(CHANGE_ROW, { fid: file.id, cid: card.id, value: Number(value) });
+      },
+    },
+    col: {
+      get() {
+        const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+        const card = file.cards.find(c => c.id.toString() === this.id.toString());
+        return card.table.col;
+      },
+      set(value) {
+        const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+        const card = file.cards.find(c => c.id.toString() === this.id.toString());
+        this.$store.commit(CHANGE_COL, { fid: file.id, cid: card.id, value: Number(value) });
+      },
+    },
   },
 };
 </script>
@@ -64,5 +111,11 @@ export default {
   }
   .settings-button {
     float: right;
+  }
+  .input-row {
+    width: 50px;
+  }
+  .input-col {
+    width: 50px;
   }
 </style>
