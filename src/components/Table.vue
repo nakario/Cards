@@ -3,8 +3,8 @@
     <table>
       <tr v-for="row in rows">
         <cell v-for="col in cols" :header="row===0||col===0" :class="{'top-left': row===0&&col===0}">
-          <div class="placeholder" @blur="log(`${row}, ${col}`)" :contenteditable="row!==0||col!==0">
-            {{ td[row][col].type == undefined ? 'x' : td[row][col].data }}
+          <div class="cell" @blur="onBlur(row, col, $event)" :contenteditable="row!=0||col!=0">
+            {{ td[row][col].value }}
           </div>
         </cell>
       </tr>
@@ -14,6 +14,7 @@
 
 <script>
   import Cell from './Cell';
+  import { CHANGE_CELL } from '../vuex/mutation-types';
 
   export default {
     props: {
@@ -26,6 +27,12 @@
         required: true,
       },
       data: {
+        required: true,
+      },
+      fid: {
+        required: true,
+      },
+      cid: {
         required: true,
       },
     },
@@ -45,9 +52,9 @@
           const cols = [];
           for (const j of this.cols) {
             if (i <= this.row && j <= this.col) {
-              cols.push({ data: this.data[i][j].data, type: 'String' });
+              cols.push({ value: this.data[i][j].value, type: 'String' });
             } else {
-              cols.push({ data: undefined, type: undefined });
+              cols.push({ value: undefined, type: undefined });
             }
           }
           rows.push(cols);
@@ -58,6 +65,9 @@
     methods: {
       log: function(msg) {
         console.log(msg);
+      },
+      onBlur: function(row, col, event) {
+        this.$store.commit(CHANGE_CELL, { fid: 1, cid: 1, row, col, value: event.target.innerText });
       },
     },
   };
@@ -76,6 +86,9 @@
     overflow: hidden;
     border: 2px black solid;
   }
+  th {
+    background-color: lightgrey;
+  }
   th.top-left {
     background-image: linear-gradient(to top right,
                         transparent, transparent 47%,
@@ -84,12 +97,12 @@
                         black 51%, transparent 53%,
                         transparent 53%, transparent);
   }
-  .placeholder {
+  .cell {
     width: 100px;
     widows: 100px;
     white-space: nowrap;
   }
-  .placeholder:focus {
+  .cell:focus {
     outline: none;
   }
 </style>

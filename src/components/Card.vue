@@ -5,7 +5,7 @@
     <div class="supporting-text mdl-card__supporting-text mdl-card--border" contenteditable="true" placeholder="description">
     </div>
     <div class="main mdl-card--border">
-      <card-table :row="row" :col="col" :data="table.data"></card-table>
+      <card-table :row="row" :col="col" :data="table.data" :fid="fid" :cid="id"></card-table>
     </div>
     <div class="mdl-card__actions mdl-card--border">
       <input v-model="row" type="number" class="input-row">

@@ -48,5 +48,10 @@ export default new Vuex.Store({
       }
       card.table.col = value;
     },
+    [types.CHANGE_CELL] (state, { fid, cid, row, col, value }) {
+      const file = state.files.find(f => f.id.toString() === fid.toString());
+      const card = file.cards.find(c => c.id.toString() === cid.toString());
+      card.table.data[row][col].value = value;
+    },
   },
 });
