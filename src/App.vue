@@ -30,26 +30,24 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 import router from './router';
+import { NEW_FILE } from './vuex/mutation-types';
 
 export default {
   name: 'app',
-  data: function() {
-    return {
-      files: [],
-    };
-  },
   methods: {
+    ...mapMutations([
+      NEW_FILE,
+    ]),
     clickFile: function(id) {
       router.push(`/files/${id}`);
     },
-    newFile: function() {
-      const id = this.files.length + 1;
-      this.files.push({
-        id,
-        name: `File ${id}`,
-      });
-    },
+  },
+  computed: {
+    ...mapState([
+      'files',
+    ]),
   },
 };
 </script>

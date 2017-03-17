@@ -15,23 +15,18 @@
 <script>
   import Cell from './Cell';
 
-  const MAX_ROW = 4;
-  const MAX_COL = 4;
-
-  function hoge() {
-    return [[{ data: '', type: 'String' }, { data: 'header', type: 'String' }, { data: 'aaaaaaaaaaaaaaaaaaaaaaa', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }], [{ data: 'a', type: 'String' }, { data: 'a', type: 'String' }, { data: 'a', type: 'String' }]];
-  }
-
   export default {
     props: {
       row: {
-        default: 2,
+        type: Number,
+        required: true,
       },
       col: {
-        default: 2,
+        type: Number,
+        required: true,
       },
-      table: {
-        default: hoge,
+      data: {
+        required: true,
       },
     },
     components: {
@@ -39,10 +34,10 @@
     },
     computed: {
       rows: function() {
-        return [...Array(MAX_ROW + 1).keys()];
+        return [...Array(this.row + 1).keys()];
       },
       cols: function() {
-        return [...Array(MAX_COL + 1).keys()];
+        return [...Array(this.col + 1).keys()];
       },
       td: function() {
         const rows = [];
@@ -50,7 +45,7 @@
           const cols = [];
           for (const j of this.cols) {
             if (i <= this.row && j <= this.col) {
-              cols.push({ data: this.table[i][j].data, type: 'String' });
+              cols.push({ data: this.data[i][j].data, type: 'String' });
             } else {
               cols.push({ data: undefined, type: undefined });
             }
