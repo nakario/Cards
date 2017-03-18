@@ -4,3 +4,4 @@ export const CHANGE_ACTIVE = 'changeActive';
 export const CHANGE_ROW = 'changeRow';
 export const CHANGE_COL = 'changeCol';
 export const CHANGE_CELL = 'changeCell';
+export const CHANGE_TEXT = 'changeText';
