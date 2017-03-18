@@ -2,8 +2,9 @@
   <div class="table-wrapper">
     <table>
       <tr v-for="row in rows">
-        <cell v-for="col in cols" :header="row===0||col===0" :class="{'top-left': row===0&&col===0}">
-          <div class="cell" @blur="onBlur(row, col, $event)" :contenteditable="row!=0||col!=0">
+        <cell v-for="col in cols" :header="row===0||col===0" :class="{'top-left': row===0&&col===0, 'outer-cell': true}">
+          <div v-if="td[row][col].value === '' || td[row][col].value == null" class="inner-cell" @blur="onBlur(row, col, $event)" :contenteditable="row!=0||col!=0" :placeholder="row_col(row,col)"></div>
+          <div v-else class="inner-cell" @blur="onBlur(row, col, $event)" :contenteditable="row!=0||col!=0">
             {{ td[row][col].value }}
           </div>
         </cell>
@@ -66,6 +67,15 @@
       log: function(msg) {
         console.log(msg);
       },
+      row_col: function(row, col) {
+        if (row === 0) {
+          return col;
+        }
+        if (col === 0) {
+          return row;
+        }
+        return '';
+      },
       onBlur: function(row, col, event) {
         this.$store.commit(CHANGE_CELL, { fid: 1, cid: 1, row, col, value: event.target.innerText });
       },
@@ -97,12 +107,16 @@
                         black 51%, transparent 53%,
                         transparent 53%, transparent);
   }
-  .cell {
+  .inner-cell {
     width: 100px;
-    widows: 100px;
+    height: 1.5em;
     white-space: nowrap;
   }
-  .cell:focus {
+  .inner-cell:focus {
     outline: none;
+  }
+  [contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    display: block; /* For Firefox */
   }
 </style>
