@@ -9,8 +9,8 @@
       </button>
     </div>
     <div class="detail-view">
-      <div v-if="cards.length > 0">
-        <file-table :row="cards[0].table.row" :col="cards[0].table.col" :data="cards[0].table.data" :fid="$route.params.id" :cid="cards[0].id"></file-table>
+      <div v-if="active > 0">
+        <file-table :row="cards.find(c => c.id == active).table.row" :col="cards.find(c => c.id == active).table.col" :data="cards.find(c => c.id == active).table.data" :fid="$route.params.id" :cid="active"></file-table>
       </div>
       <div v-else></div>
     </div>
@@ -29,6 +29,9 @@ export default {
     ...mapState({
       cards: function(state) {
         return state.files.find(f => f.id.toString() === this.$route.params.id.toString()).cards;
+      },
+      active: function(state) {
+        return state.files.find(f => f.id.toString() === this.$route.params.id.toString()).active;
       },
     }),
   },

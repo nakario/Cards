@@ -15,6 +15,7 @@ export default new Vuex.Store({
         id,
         name: `File ${id}`,
         cards: [],
+        active: 0,
       });
     },
     [types.NEW_CARD] (state, { fid }) {
@@ -28,6 +29,11 @@ export default new Vuex.Store({
           data: [[{}, {}], [{}, {}]],
         },
       });
+    },
+    [types.CHANGE_ACTIVE] (state, { fid, cid }) {
+      console.log('hoge');
+      const file = state.files.find(f => f.id.toString() === fid.toString());
+      file.active = cid;
     },
     [types.CHANGE_ROW] (state, { fid, cid, value }) {
       let v = parseInt(value, 10);
