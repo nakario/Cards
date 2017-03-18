@@ -118,5 +118,7 @@
   [contenteditable=true]:empty:before {
     content: attr(placeholder);
     display: block; /* For Firefox */
+    color: grey;
+    font-weight: normal;
   }
 </style>
