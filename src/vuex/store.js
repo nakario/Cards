@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import router from '../router';
 import * as types from './mutation-types';
 
 Vue.use(Vuex);
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         cards: [],
         active: 0,
       });
+      router.push(`/files/${id}`);
     },
     [types.NEW_CARD] (state, { fid }) {
       const cards = state.files.find(f => f.id.toString() === fid.toString()).cards;
@@ -31,7 +33,6 @@ export default new Vuex.Store({
       });
     },
     [types.CHANGE_ACTIVE] (state, { fid, cid }) {
-      console.log('hoge');
       const file = state.files.find(f => f.id.toString() === fid.toString());
       file.active = cid;
     },
