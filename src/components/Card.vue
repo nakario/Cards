@@ -1,11 +1,11 @@
 <template>
-  <div class="card mdl-card mdl-shadow--2dp">
+  <div class="card mdl-card mdl-shadow--2dp" @click="changeActive({ fid: fid, cid: id })">
     <div class="title mdl-card__title" contenteditable="true" placeholder="Title">
     </div>
     <div class="supporting-text mdl-card__supporting-text mdl-card--border" contenteditable="true" placeholder="description">
     </div>
     <div class="main mdl-card--border">
-      <card-table :row="row" :col="col" :data="table.data"></card-table>
+      <card-table :row="row" :col="col" :data="table.data" :fid="fid" :cid="id"></card-table>
     </div>
     <div class="mdl-card__actions mdl-card--border">
       <input v-model="row" type="number" class="input-row">
@@ -20,8 +20,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import Table from './Table';
-import { CHANGE_ROW, CHANGE_COL } from '../vuex/mutation-types';
+import { CHANGE_ACTIVE, CHANGE_ROW, CHANGE_COL } from '../vuex/mutation-types';
 
 export default {
   name: 'card',
@@ -32,6 +33,9 @@ export default {
     log: function(msg) {
       console.log(msg);
     },
+    ...mapMutations([
+      CHANGE_ACTIVE,
+    ]),
   },
   props: {
     fid: {
