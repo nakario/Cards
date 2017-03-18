@@ -20,17 +20,28 @@ export default new Vuex.Store({
       });
       router.push(`/files/${id}`);
     },
-    [types.NEW_CARD] (state, { fid }) {
+    [types.NEW_CARD] (state, { fid, type }) {
       const cards = state.files.find(f => f.id.toString() === fid.toString()).cards;
       const id = cards.length + 1;
-      cards.push({
-        id,
-        table: {
-          row: 1,
-          col: 1,
-          data: [[{}, {}], [{}, {}]],
-        },
-      });
+      if (type === 'table') {
+        cards.push({
+          id,
+          type: 'table',
+          table: {
+            row: 1,
+            col: 1,
+            data: [[{}, {}], [{}, {}]],
+          },
+        });
+      } else if (type === 'text') {
+        cards.push({
+          id,
+          type: 'text',
+          text: '',
+        });
+      } else {
+        console.log('unexpected type');
+      }
     },
     [types.CHANGE_ACTIVE] (state, { fid, cid }) {
       const file = state.files.find(f => f.id.toString() === fid.toString());
@@ -63,6 +74,11 @@ export default new Vuex.Store({
       const file = state.files.find(f => f.id.toString() === fid.toString());
       const card = file.cards.find(c => c.id.toString() === cid.toString());
       card.table.data[row][col].value = value;
+    },
+    [types.CHANGE_TEXT] (state, { fid, cid, value }) {
+      const file = state.files.find(f => f.id.toString() === fid.toString());
+      const card = file.cards.find(c => c.id.toString() === cid.toString());
+      card.text = value;
     },
   },
 });

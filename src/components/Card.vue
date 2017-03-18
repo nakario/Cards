@@ -5,16 +5,20 @@
     <div class="supporting-text mdl-card__supporting-text mdl-card--border" contenteditable="true" placeholder="description">
     </div>
     <div class="main mdl-card--border">
-      <card-table :row="row" :col="col" :data="table.data" :fid="fid" :cid="id"></card-table>
+      <card-table v-if="type=='table'" :row="row" :col="col" :data="table.data" :fid="fid" :cid="id"></card-table>
+      <textarea v-if="type==='text'" v-model="text" class="text"></textarea>
     </div>
     <div class="mdl-card__actions mdl-card--border">
-      <input v-model="row" type="number" class="input-row">
-      <input v-model="col" type="number" class="input-col">
-      <a class="mdl-button mdl-js-button" @click="log(table)">
+      <input v-if="type==='table'" v-model="row" type="number" class="input-row">
+      <input v-if="type==='table'" v-model="col" type="number" class="input-col">
+      <a class="mdl-button mdl-js-button" @click="log(type)">
         action
       </a>
       <a class="settings-button mdl-button mdl-js-button mdl-button--icon">
         <i class="material-icons">settings</i>
+      </a>
+      <a v-if="type==='table'" class="settings-button mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">equalizer</i>
       </a>
   </div>
 </template>
@@ -22,7 +26,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import Table from './Table';
-import { CHANGE_ACTIVE, CHANGE_ROW, CHANGE_COL } from '../vuex/mutation-types';
+import { CHANGE_ACTIVE, CHANGE_ROW, CHANGE_COL, CHANGE_TEXT } from '../vuex/mutation-types';
 
 export default {
   name: 'card',
@@ -42,6 +46,9 @@ export default {
       requierd: true,
     },
     id: {
+      requierd: true,
+    },
+    type: {
       requierd: true,
     },
   },
@@ -73,6 +80,18 @@ export default {
         const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
         const card = file.cards.find(c => c.id.toString() === this.id.toString());
         this.$store.commit(CHANGE_COL, { fid: file.id, cid: card.id, value: Number(value) });
+      },
+    },
+    text: {
+      get() {
+        const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+        const card = file.cards.find(c => c.id.toString() === this.id.toString());
+        return card.text;
+      },
+      set(value) {
+        const file = this.$store.state.files.find(f => f.id.toString() === this.fid.toString());
+        const card = file.cards.find(c => c.id.toString() === this.id.toString());
+        this.$store.commit(CHANGE_TEXT, { fid: file.id, cid: card.id, value });
       },
     },
   },
@@ -121,5 +140,9 @@ export default {
   }
   .input-col {
     width: 50px;
+  }
+  .text {
+    width: 100%;
+    height: 100%;
   }
 </style>
